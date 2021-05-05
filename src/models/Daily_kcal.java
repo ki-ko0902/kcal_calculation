@@ -9,9 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name = "daily_kcal")
+
+@NamedQueries({
+    @NamedQuery(
+            name = "getAllDaily_kcal",
+            query = "SELECT d FROM Daily_kcal AS d ORDER BY d.id DESC"
+            ),
+    @NamedQuery(
+            name = "getDaily_kcalCount",
+            query = "SELECT COUNT(d) FROM Daily_kcal AS d"
+            )
+})
+
+
 
 @Entity
 

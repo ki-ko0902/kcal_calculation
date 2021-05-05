@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DNUtil {
+public class DBUtil {
     private static final String PERSISTENCE_UNIT_NAME = "kcal_calculation";
     private static EntityManagerFactory emf;
 
