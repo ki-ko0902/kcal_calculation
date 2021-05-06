@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,6 +41,10 @@ public class DailyIndexServlet extends HttpServlet {
         response.getWriter().append(Integer.valueOf(daily_kcal.size()).toString());
 
         em.close();
-    }
 
+        request.setAttribute("daily_kcal", daily_kcal);
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/index.jsp");
+        rd.forward(request, response);
+    }
 }

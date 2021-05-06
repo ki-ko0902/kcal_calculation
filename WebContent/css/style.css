@@ -13,19 +13,23 @@ body {
 }
 
 #content {
-    width: 94%;
-    margin-top: 15px;
-    padding-left: 3%;
+    width: 80%;
+    margin-top: 20px;
+    padding-left: 7%;
 }
 
 h1 {
-    font-size: 24px;
-    display: inline;
+    width: 94%;
+    padding-top: 17px;
+    padding-left: 3%;
+    font-size: 36px;
+    color: #eeeeee;
 }
 h2 {
-    font-size: 36px;
+    font-size: 24px;
     margin-bottom: 15px;
 }
+
 
 li {
     margin-top: 10px;
@@ -33,6 +37,7 @@ li {
 }
 
 p {
+     font-size: 18px;
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -90,15 +95,6 @@ button {
     background-color: #f8d7da;
 }
 
-table#employee_list th {
-    width: 30%;
-    padding: 10px 2%;
-}
-
-table#employee_list td {
-    width: 29%;
-    padding: 10px 2%;
-}
 
 tr.row1 {
     background-color: #f2f2f2;
@@ -108,9 +104,7 @@ tr.row0 {
     background-color: #ffffff;
 }
 
-select {
-    height: 30px;
-}
+
 #header_menu {
     width: 57%;
     padding-top: 17px;
@@ -133,34 +127,70 @@ select {
 h1 a {
     color: #eeeeee;
 }
-table#report_list th {
+table#personal_data th {
     font-weight: bold;
     padding: 10px 2%;
 }
 
-table#report_list .report_name {
-    width: 15%;
+table#personal_data .personal_gender {
+    width: 10%;
+    text-align: center;
+   }
+
+table#personal_data .personal_age {
+    width: 10%;
+    text-align: center;
+}
+
+table#personal_data .personal_height {
+    width: 20%;
+    text-align: center;
+}
+
+table#personal_data .personal_weight {
+    width: 20%;
+    text-align: center;
+}
+
+table#personal_data .personal_target_kcal {
+    width: 25%;
+    text-align: center;
+}
+
+table#personal_data .personal_edit {
+    width: 8%;
+    text-align: center;
+}
+
+table#daily_kcal th {
+    font-weight: bold;
     padding: 10px 2%;
 }
-table#report_list .report_date {
+
+table#daily_kcal .daily_date {
     width: 15%;
+    text-align: center;
+   }
+
+table#daily_kcal .daily_weight {
+    width: 10%;
+    text-align: center;
 }
 
-table#report_list .report_title {
-    width: 30%;
+table#daily_kcal .daily_kcal {
+    width: 15%;
+    text-align: center;
 }
 
-table#report_list .report_action {
-    width: 14%;
+table#daily_kcal .daily_bmr {
+    width: 15%;
+    text-align: center;
 }
 
-table#report_list .startTime {
+table#daily_kcal .daily_edit {
     width: 8%;
+    text-align: center;
 }
-table#report_list .endTime {
-    width: 8%;
-}
-
 pre {
     font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
 }
