@@ -11,8 +11,8 @@
                 <tr>
                     <th class="personal_gender">性別</th>
                     <th class="personal_age">年齢</th>
-                    <th class="personal_height">身長</th>
-                    <th class="personal_weight">体重</th>
+                    <th class="personal_height">身長(cm)</th>
+                    <th class="personal_weight">体重(kg)</th>
                     <th class="personal_target_kcal">目標摂取kcal</th>
                     <th class="personal_edit">編集</th>
                 </tr>

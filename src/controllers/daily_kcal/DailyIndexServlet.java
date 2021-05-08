@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Daily_kcal;
+import models.Personal_data;
 import utils.DBUtil;
 
 /**
@@ -37,11 +38,15 @@ public class DailyIndexServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        List<Daily_kcal> daily_kcal = em.createNamedQuery("getAllDaily_kcal", Daily_kcal.class).getResultList();
+        List<Personal_data> personal_data = em.createNamedQuery("getAllPersonal_data", Personal_data.class).getResultList();
+        response.getWriter().append(Integer.valueOf( personal_data.size()).toString());
+
+       List<Daily_kcal> daily_kcal = em.createNamedQuery("getAllDaily_kcal", Daily_kcal.class).getResultList();
         response.getWriter().append(Integer.valueOf(daily_kcal.size()).toString());
 
         em.close();
 
+        request.setAttribute("personal_data", personal_data);
         request.setAttribute("daily_kcal", daily_kcal);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/index.jsp");
