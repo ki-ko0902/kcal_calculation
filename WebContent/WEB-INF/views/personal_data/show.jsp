@@ -29,6 +29,10 @@
                             <th>目標摂取kcal</th>
                             <td><c:out value="${personal_data.target_kcal}" /></td>
                         </tr>
+                        <tr>
+                            <th>目標体重</th>
+                            <td><c:out value="${personal_data.target_weight}" /></td>
+                        </tr>
                     </tbody>
                 </table>
 

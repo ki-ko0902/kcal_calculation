@@ -35,6 +35,9 @@ public class Personal_data {
     @Column(name = "target_kcal", nullable = false)
     private Integer target_kcal;
 
+    @Column(name = "target_weight", nullable = false)
+    private Integer target_weight;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +84,13 @@ public class Personal_data {
 
     public void setTarget_kcal(Integer target_kcal) {
         this.target_kcal = target_kcal;
+    }
+
+    public Integer getTarget_weight() {
+        return target_weight;
+    }
+
+    public void setTarget_weight(Integer target_weight) {
+        this.target_weight = target_weight;
     }
 }

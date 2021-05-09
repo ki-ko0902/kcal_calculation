@@ -5,7 +5,7 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
 
-        <h2>始めの設定</h2>
+        <h2>あなたの情報</h2>
         <table id="personal_data">
             <tbody>
                 <tr>
@@ -14,6 +14,7 @@
                     <th class="personal_height">身長(cm)</th>
                     <th class="personal_weight">体重(kg)</th>
                     <th class="personal_target_kcal">目標摂取kcal</th>
+                    <th class="personal_target_weight">目標体重</th>
                     <th class="personal_edit">編集</th>
                 </tr>
                 <c:forEach var="personal_data" items="${personal_data}"
@@ -28,12 +29,15 @@
                                 value="${personal_data.weight}" /></td>
                         <td class="personal_target_kcal"><c:out
                                 value="${personal_data.target_kcal}" /></td>
+                        <td class="personal_target_weight"><c:out
+                                value="${personal_data.target_weight}" /></td>
                         <td class="personal_edit"><a
                             href="<c:url value='/personal/show?id=${personal_data.id}' />">編集</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
+        <p><a href="<c:url value='/personal/new' />">新規登録</a></p>
         <body>
                 <p>目標体重</p>
         </body>

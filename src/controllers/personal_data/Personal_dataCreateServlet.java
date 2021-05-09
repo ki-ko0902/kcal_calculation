@@ -44,8 +44,11 @@ public class Personal_dataCreateServlet extends HttpServlet {
             p.setAge(Integer.parseInt(request.getParameter("age")));
 
           //p.setTarget_kcal(Integer.parseInt(request.getParameter("target_kcal")));
+          //仮で数字を設定
            int target_kcal = 1500;
             p.setTarget_kcal(target_kcal);
+
+            p.setTarget_weight(Integer.parseInt(request.getParameter("target_weight")));
 
 
 
