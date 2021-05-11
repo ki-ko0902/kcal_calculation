@@ -24,10 +24,10 @@ public class Personal_data {
     private String gender;
 
     @Column(name = "height", nullable = false)
-    private Integer height;
+    private Double height;
 
     @Column(name = "weight", nullable = false)
-    private Integer weight;
+    private Double weight;
 
     @Column(name = "age", nullable = false)
     private Integer age;
@@ -36,7 +36,9 @@ public class Personal_data {
     private Integer target_kcal;
 
     @Column(name = "target_weight", nullable = false)
-    private Integer target_weight;
+    private Double target_weight;
+
+
 
     public Integer getId() {
         return id;
@@ -54,19 +56,19 @@ public class Personal_data {
         this.gender = gender;
     }
 
-    public Integer getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Integer height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
-    public Integer getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
@@ -86,11 +88,11 @@ public class Personal_data {
         this.target_kcal = target_kcal;
     }
 
-    public Integer getTarget_weight() {
+    public Double getTarget_weight() {
         return target_weight;
     }
 
-    public void setTarget_weight(Integer target_weight) {
+    public void setTarget_weight(Double target_weight) {
         this.target_weight = target_weight;
     }
 }

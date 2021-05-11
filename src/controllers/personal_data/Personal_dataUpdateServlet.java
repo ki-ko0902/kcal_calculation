@@ -41,8 +41,8 @@ public class Personal_dataUpdateServlet extends HttpServlet {
                     (Integer) (request.getSession().getAttribute("personal_data_id")));
 
             p.setGender(request.getParameter("gender"));
-            p.setHeight(Integer.parseInt(request.getParameter("height")));
-            p.setWeight(Integer.parseInt(request.getParameter("weight")));
+            p.setHeight(Double.parseDouble(request.getParameter("height")));
+            p.setWeight(Double.parseDouble(request.getParameter("weight")));
             p.setAge(Integer.parseInt(request.getParameter("age")));
 
             // p.setTarget_kcal(Integer.parseInt(request.getParameter("target_kcal")));

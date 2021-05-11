@@ -45,13 +45,19 @@ public class Daily_kcal {
     private Integer kcal;
 
     @Column(name = "todays_weight", nullable = false)
-    private Integer todays_weight;
+    private Double todays_weight;
 
     @Column(name = "bmr_difference", nullable = false)
     private Integer bmr_difference;
 
     @Column(name = "date", nullable = false)
     private Date date;
+
+    @Column(name = "year", nullable = false)
+    private String year;
+
+    @Column(name = "month", nullable = false)
+    private String month;
 
     public Integer getId() {
         return id;
@@ -77,11 +83,11 @@ public class Daily_kcal {
         this.kcal = kcal;
     }
 
-    public Integer getTodays_weight() {
+    public Double getTodays_weight() {
         return todays_weight;
     }
 
-    public void setTodays_weight(Integer todays_weight) {
+    public void setTodays_weight(Double todays_weight) {
         this.todays_weight = todays_weight;
     }
 
@@ -99,6 +105,22 @@ public class Daily_kcal {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
     }
 
 
