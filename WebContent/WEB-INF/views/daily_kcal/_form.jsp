@@ -13,7 +13,7 @@
     </div>
 </c:if>
 
-<label for="report_date">日付</label>
+<label for="date">日付</label>
 <br />
 <input type="date" name="date"
     value="<fmt:formatDate value='${daily_kcal.date}' pattern='yyyy-MM-dd' />" />

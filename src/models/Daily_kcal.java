@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,10 +55,10 @@ public class Daily_kcal {
     private Date date;
 
     @Column(name = "year", nullable = false)
-    private String year;
+    private SimpleDateFormat year;
 
     @Column(name = "month", nullable = false)
-    private String month;
+    private SimpleDateFormat month;
 
     public Integer getId() {
         return id;
@@ -107,19 +108,19 @@ public class Daily_kcal {
         this.date = date;
     }
 
-    public String getYear() {
+    public SimpleDateFormat getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(SimpleDateFormat year) {
         this.year = year;
     }
 
-    public String getMonth() {
+    public SimpleDateFormat getMonth() {
         return month;
     }
 
-    public void setMonth(String month) {
+    public void setMonth(SimpleDateFormat month) {
         this.month = month;
     }
 
