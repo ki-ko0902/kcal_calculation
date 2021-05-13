@@ -48,10 +48,12 @@ public class Daily_kcalCreateServlet extends HttpServlet {
             }
             d.setDate(date);
 
-            SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+            Date yyyy = Date.valueOf(sdf.format(d.getDate()));
             d.setYear(yyyy);
 
-            SimpleDateFormat mm = new SimpleDateFormat("mm");
+            SimpleDateFormat sdf2 = new SimpleDateFormat("mm");
+            Date mm = Date.valueOf(sdf2.format(d.getDate()));
             d.setMonth(mm);
 
             d.setKcal(Integer.parseInt(request.getParameter("kcal")));
