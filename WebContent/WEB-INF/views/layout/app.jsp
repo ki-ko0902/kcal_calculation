@@ -8,10 +8,21 @@
         <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
         <link rel="stylesheet" href="<c:url value='/css/style.css' />">
     </head>
-    <body>
+   <body>
         <div id="wrapper">
             <div id="header">
-                <h1>kcal計算</h1>
+                <div id="header_menu">
+                    <h1><a href="<c:url value='/' />">日報管理システム</a></h1>&nbsp;&nbsp;&nbsp;
+                    <c:if test="${sessionScope.login_personal_data != null}">
+                        <a href="<c:url value='/daily/index' />">一覧</a>&nbsp;
+                    </c:if>
+                </div>
+                <c:if test="${sessionScope.login_personal_data != null}">
+                    <div id="personal_data_name">
+                        <c:out value="${sessionScope.login_personal_data.name}" />&nbsp;さん&nbsp;&nbsp;&nbsp;
+                        <a href="<c:url value='/logout' />">ログアウト</a>
+                    </div>
+                </c:if>
             </div>
             <div id="content">
                 ${param.content}

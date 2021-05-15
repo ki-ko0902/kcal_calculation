@@ -43,12 +43,8 @@ public class Personal_dataCreateServlet extends HttpServlet {
             Personal_data p = new Personal_data();
 
             p.setName(request.getParameter("name"));
-            p.setPassword(
-                EncryptUtil.getPasswordEncrypt(
-                    request.getParameter("password"),
-                        (String)this.getServletContext().getAttribute("pepper")
-                    )
-                );
+            p.setPassword(EncryptUtil.getPasswordEncrypt(request.getParameter("password"),
+                    (String) this.getServletContext().getAttribute("pepper")));
 
             p.setGender(request.getParameter("gender"));
             p.setHeight(Double.parseDouble(request.getParameter("height")));
@@ -63,19 +59,10 @@ public class Personal_dataCreateServlet extends HttpServlet {
             double m = Double.parseDouble(request.getParameter("momentum"));
             int month = Integer.parseInt(request.getParameter("month"));
 
-
-
-            //if(request.getParameter("gender").equals("男性")){}
-
-
-            // 基礎代謝量 （BMR）
-            // bmr(男性)： 13.397×体重kg＋4.799×身長cm−5.677×年齢+88.362
-            double bmr = (13.397 * w) + (4.799 * h) - (5.677 * a) + 88.362;
-
-            // bmr(女性)： (9.247 * 体重kg) + 3.098 * 身長cm − 4.33 * 年齢 + 447.593
-            //double bmr = (9.247 * w) + (3.098 * h) - (4.33 * a) + 447.593;
+            double bmr = getBmr(request.getParameter("gender"), w, h, a);
 
             // 1日の消費量 = BMR * 運動量
+
             double tdee = bmr * m;
 
             // 脂肪1kgを消費するのに必要なカロリーは 7200kcal
@@ -84,7 +71,9 @@ public class Personal_dataCreateServlet extends HttpServlet {
             double kcal = tdee - (w - tw) * (7200 / (month * 30));
             int target_kcal = (int) kcal;
 
-            List<String> errors = Personal_dataValidator.validate(true, true,p, bmr);
+            p.setTarget_kcal(target_kcal);
+
+            List<String> errors = Personal_dataValidator.validate(true, true, p, bmr);
             if (errors.size() > 0) {
 
                 em.close();
@@ -97,8 +86,6 @@ public class Personal_dataCreateServlet extends HttpServlet {
 
             } else {
 
-                p.setTarget_kcal(target_kcal);
-
                 em.getTransaction().begin();
                 em.persist(p);
                 em.getTransaction().commit();
@@ -107,6 +94,20 @@ public class Personal_dataCreateServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/daily/index");
 
             }
+
         }
+    }
+
+    private double getBmr(String gender, double w, double h, int a) {
+        double bmr = 0;
+        if (gender.equals("男性")) {
+            // 基礎代謝量 （BMR）
+            // bmr(男性)： 13.397×体重kg＋4.799×身長cm−5.677×年齢+88.362
+            bmr = (13.397 * w) + (4.799 * h) - (5.677 * a) + 88.362;
+        } else {
+            // bmr(女性)： (9.247 * 体重kg) + 3.098 * 身長cm − 4.33 * 年齢 + 447.593
+            bmr = (9.247 * w) + (3.098 * h) - (4.33 * a) + 447.593;
+        }
+        return bmr;
     }
 }

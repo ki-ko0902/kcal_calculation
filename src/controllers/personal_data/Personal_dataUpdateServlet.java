@@ -44,9 +44,8 @@ public class Personal_dataUpdateServlet extends HttpServlet {
             Personal_data p = em.find(Personal_data.class,
                     (Integer) (request.getSession().getAttribute("personal_data_id")));
 
-
             Boolean nameDuplicateCheckFlag = true;
-            if(p.getName().equals(request.getParameter("name"))) {
+            if (p.getName().equals(request.getParameter("name"))) {
                 nameDuplicateCheckFlag = false;
             } else {
                 p.setName(request.getParameter("name"));
@@ -54,15 +53,11 @@ public class Personal_dataUpdateServlet extends HttpServlet {
 
             Boolean passwordCheckFlag = true;
             String password = request.getParameter("password");
-            if(password == null || password.equals("")) {
+            if (password == null || password.equals("")) {
                 passwordCheckFlag = false;
             } else {
-                p.setPassword(
-                        EncryptUtil.getPasswordEncrypt(
-                                password,
-                                (String)this.getServletContext().getAttribute("pepper")
-                                )
-                        );
+                p.setPassword(EncryptUtil.getPasswordEncrypt(password,
+                        (String) this.getServletContext().getAttribute("pepper")));
             }
 
             p.setName(request.getParameter("name"));
@@ -81,81 +76,54 @@ public class Personal_dataUpdateServlet extends HttpServlet {
             double m = Double.parseDouble(request.getParameter("momentum"));
             int month = Integer.parseInt(request.getParameter("month"));
 
-            if (request.getParameter("gender").equals("男性")) {
+            double bmr = getBmr(request.getParameter("gender"), w, h, a);
 
-                // 基礎代謝量 （BMR）
-                // bmr(男性)： 13.397×体重kg＋4.799×身長cm−5.677×年齢+88.362
-                double bmr = (13.397 * w) + (4.799 * h) - (5.677 * a) + 88.362;
+            // 1日の消費量 = BMR * 運動量
 
-                // BMR*運動量(momentum)＝一日の消費量(tdee)
-                double tdee = bmr * m;
+            double tdee = bmr * m;
 
-                // 脂肪1kgを消費するのに必要なカロリーは 7200kcal
-                // 1日の目標摂取kcal(target_kcal) = tdee - (現在の体重 - 目標体重)*7200 /
-                // (月*1月を30日仮定)
-                double kcal = tdee - (w - tw) * (7200 / (month * 30));
-                int target_kcal = (int) kcal;
+            // 脂肪1kgを消費するのに必要なカロリーは 7200kcal
+            // 1日の目標摂取kcal(target_kcal) = tdee - (現在の体重 - 目標体重)*7200 /
+            // (月*1月を30日仮定)
+            double kcal = tdee - (w - tw) * (7200 / (month * 30));
+            int target_kcal = (int) kcal;
 
-                // ※ 1日の摂取カロリー (target_kcal) > BMR
-                List<String> errors = Personal_dataValidator.validate(nameDuplicateCheckFlag,passwordCheckFlag,p,bmr);
-                if (errors.size() > 0) {
+            p.setTarget_kcal(target_kcal);
 
-                    em.close();
+            List<String> errors = Personal_dataValidator.validate(nameDuplicateCheckFlag, passwordCheckFlag, p, bmr);
+            if (errors.size() > 0) {
 
-                    request.setAttribute("_token", request.getSession().getId());
-                    request.setAttribute("personal_data", p);
+                em.close();
 
-                    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/personal/new.jsp");
-                    rd.forward(request, response);
+                request.setAttribute("_token", request.getSession().getId());
+                request.setAttribute("personal_data", p);
 
-                } else {
-
-                    p.setTarget_kcal(target_kcal);
-
-                    em.getTransaction().begin();
-                    em.persist(p);
-                    em.getTransaction().commit();
-                    em.close();
-
-                    response.sendRedirect(request.getContextPath() + "/daily/index");
-
-                }
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/personal/new.jsp");
+                rd.forward(request, response);
 
             } else {
-                // bmr(女性)： (9.247 * 体重kg) + 3.098 * 身長cm − 4.33 * 年齢 + 447.593
-                double bmr = (9.247 * w) + (3.098 * h) - (4.33 * a) + 447.593;
 
-                double tdee = bmr * m;
+                em.getTransaction().begin();
+                em.persist(p);
+                em.getTransaction().commit();
+                em.close();
 
-                double kcal = tdee - (w - tw) * ((7200 / month) * 30);
-
-                int target_kcal = (int) kcal;
-
-                List<String> errors = Personal_dataValidator.validate(true, true,p,bmr);
-                if (errors.size() > 0) {
-
-                    em.close();
-
-                    request.setAttribute("_token", request.getSession().getId());
-                    request.setAttribute("personal_data", p);
-
-                    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/personal/new.jsp");
-                    rd.forward(request, response);
-
-                } else {
-
-                    p.setTarget_kcal(target_kcal);
-
-                    em.getTransaction().begin();
-                    em.persist(p);
-                    em.getTransaction().commit();
-                    em.close();
-
-                    response.sendRedirect(request.getContextPath() + "/daily/index");
-
-                }
-
+                response.sendRedirect(request.getContextPath() + "/daily/index");
             }
         }
+    }
+
+    private double getBmr(String gender, double w, double h, int a) {
+        double bmr = 0;
+        if (gender.equals("男性")) {
+            // 基礎代謝量 （BMR）
+            // bmr(男性)： 13.397×体重kg＋4.799×身長cm−5.677×年齢+88.362
+            bmr = (13.397 * w) + (4.799 * h) - (5.677 * a) + 88.362;
+        } else {
+            // bmr(女性)： (9.247 * 体重kg) + 3.098 * 身長cm − 4.33 * 年齢 + 447.593
+            bmr = (9.247 * w) + (3.098 * h) - (4.33 * a) + 447.593;
+        }
+        return bmr;
+
     }
 }

@@ -33,8 +33,10 @@ public class Daily_kcalNewServlet extends HttpServlet {
         request.setAttribute("_token", request.getSession().getId());
 
         Daily_kcal d = new Daily_kcal();
+
         d.setDate(new Date(System.currentTimeMillis()));
         request.setAttribute("daily_kcal", d);
+        request.setAttribute("personal_data", p);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/new.jsp");
         rd.forward(request, response);
