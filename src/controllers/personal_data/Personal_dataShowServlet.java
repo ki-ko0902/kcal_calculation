@@ -39,6 +39,7 @@ public class Personal_dataShowServlet extends HttpServlet {
             em.close();
 
             request.setAttribute("personal_data", p);
+            request.setAttribute("_token", request.getSession().getId());
 
 
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/personal_data/show.jsp");

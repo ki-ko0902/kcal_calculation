@@ -6,10 +6,14 @@
         <h2>入力ページ</h2>
 
         <form method="POST" action="<c:url value='/personal/create' />">
+
             <c:import url="_form.jsp" />
+
         </form>
 
-        <p><a href="<c:url value='/daily/index' />">一覧</a></p>
+        <p>
+            <a href="<c:url value='/daily/index' />">一覧</a>
+        </p>
 
     </c:param>
 </c:import>

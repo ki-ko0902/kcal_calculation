@@ -11,7 +11,24 @@
 
     </div>
 </c:if>
-<label> <input type="radio" name="gender" value="男性" required> 男性
+
+<br />
+<label for="name">名前</label>
+<br />
+<input type="text" name="name" value="${personal_data.name}" />
+<br />
+<br />
+
+
+<label for="password">パスワード</label>
+<br />
+<input type="password" name="password" />
+<br />
+<br />
+
+
+<label> <input type="radio" name="gender" value="男性" required>
+    男性
 </label>
 <label> <input type="radio" name="gender" value="女性"> 女性
 </label>
@@ -20,7 +37,6 @@
 
 <label>年齢 <input type="number" name="age" step="1" min="0"
     max="120"> 歳
-
 </label>
 <br />
 <br />

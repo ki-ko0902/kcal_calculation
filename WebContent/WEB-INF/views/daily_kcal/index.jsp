@@ -4,7 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-
+        <c:if test="${flush != null}">
+            <div id="flush_success">
+                <c:out value="${flush}"></c:out>
+            </div>
+        </c:if>
         <h2>あなたの情報</h2>
         <table id="personal_data">
             <tbody>
@@ -37,12 +41,16 @@
                 </c:forEach>
             </tbody>
         </table>
-        <p><a href="<c:url value='/personal/new' />">新規登録</a></p>
+        <p>
+            <a href="<c:url value='/personal/new' />">新規登録</a>
+        </p>
         <br />
         <br />
         </body>
         <h2>日々の記録</h2>
-         <p><a href="<c:url value='/daily/new' />">今日の登録</a></p>
+        <p>
+            <a href="<c:url value='/daily/new' />">今日の登録</a>
+        </p>
         <table id="daily_kcal">
             <tbody>
 
@@ -55,11 +63,15 @@
                 </tr>
                 <c:forEach var="daily_kcal" items="${daily_kcal}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="daily_date"><fmt:formatDate value='${daily_kcal.date}' pattern='yyyy-MM-dd' /></td>
+                        <td class="daily_date"><fmt:formatDate
+                                value='${daily_kcal.date}' pattern='yyyy-MM-dd' /></td>
                         <td class="daily_kcal"><c:out value="${daily_kcal.kcal}" /></td>
-                        <td class="daily_bmr"><c:out value="${daily_kcal.bmr_difference}" /></td>
-                        <td class="daily_weight"><c:out value="${daily_kcal.todays_weight}" /></td>
-                        <td class="daily_edit"><a href="<c:url value='/daily/show?id=${daily_kcal.id}' />">編集</a></td>
+                        <td class="daily_bmr"><c:out
+                                value="${daily_kcal.bmr_difference}" /></td>
+                        <td class="daily_weight"><c:out
+                                value="${daily_kcal.todays_weight}" /></td>
+                        <td class="daily_edit"><a
+                            href="<c:url value='/daily/show?id=${daily_kcal.id}' />">編集</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

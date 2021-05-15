@@ -36,7 +36,7 @@ public class Daily_kcalNewServlet extends HttpServlet {
         d.setDate(new Date(System.currentTimeMillis()));
         request.setAttribute("daily_kcal", d);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily/new.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/new.jsp");
         rd.forward(request, response);
     }
 

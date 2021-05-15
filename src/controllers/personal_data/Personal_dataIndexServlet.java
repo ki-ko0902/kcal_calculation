@@ -35,11 +35,20 @@ public class Personal_dataIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        long personal_data_count = (long)em.createNamedQuery("getPersonal_dataCount", Long.class)
+                .getSingleResult();
+
         List<Personal_data> personal_data = em.createNamedQuery("getAllPersonal_data", Personal_data.class).getResultList();
 
         em.close();
 
         request.setAttribute("personal_data", personal_data);
+        request.setAttribute("personal_data_count", personal_data_count);
+
+        if(request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/index.jsp");
         rd.forward(request, response);

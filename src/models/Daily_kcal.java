@@ -54,10 +54,10 @@ public class Daily_kcal {
     private Date date;
 
     @Column(name = "year", nullable = false)
-    private Date year;
+    private String year;
 
     @Column(name = "month", nullable = false)
-    private Date month;
+    private String month;
 
     public Integer getId() {
         return id;
@@ -107,19 +107,19 @@ public class Daily_kcal {
         this.date = date;
     }
 
-    public Date getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public Date getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(Date month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 

@@ -38,6 +38,9 @@ public class Personal_dataDestroyServlet extends HttpServlet {
 
             Personal_data p = em.find(Personal_data.class, (Integer)(request.getSession().getAttribute("personal_data_id")));
 
+            p.setDelete_flag(1);
+
+
             em.getTransaction().begin();
             em.remove(p);
             em.getTransaction().commit();

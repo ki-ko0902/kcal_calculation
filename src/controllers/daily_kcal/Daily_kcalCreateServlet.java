@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Daily_kcal;
-import models.Personal_data;
 import utils.DBUtil;
 
 /**
@@ -49,19 +48,19 @@ public class Daily_kcalCreateServlet extends HttpServlet {
             d.setDate(date);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-            Date yyyy = Date.valueOf(sdf.format(d.getDate()));
+            String yyyy = sdf.format(d.getDate());
             d.setYear(yyyy);
 
             SimpleDateFormat sdf2 = new SimpleDateFormat("mm");
-            Date mm = Date.valueOf(sdf2.format(d.getDate()));
+            String mm = sdf2.format(d.getDate());
             d.setMonth(mm);
 
             d.setKcal(Integer.parseInt(request.getParameter("kcal")));
             d.setTodays_weight(Double.parseDouble(request.getParameter("todays_weight")));
             double todays_w = Double.parseDouble(request.getParameter("todays_weight"));
 
-            Personal_data p = new Personal_data();
-            double tw = p.getTarget_weight();
+
+            double tw = getTarget_weight();
 
             double bmr_difference = todays_w - tw;
 
