@@ -91,6 +91,8 @@ public class Personal_dataCreateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
 
+                request.getSession().setAttribute("target_kcal", target_kcal);
+
                 response.sendRedirect(request.getContextPath() + "/daily/index");
 
             }

@@ -60,16 +60,16 @@ public class Daily_kcalCreateServlet extends HttpServlet {
             d.setMonth(mm);
 
             d.setKcal(Integer.parseInt(request.getParameter("kcal")));
+            int kcal = Integer.parseInt(request.getParameter("kcal"));
+            ;
             d.setTodays_weight(Double.parseDouble(request.getParameter("todays_weight")));
-            double todays_w = Double.parseDouble(request.getParameter("todays_weight"));
 
 
-            double target_weight = (double)request.getAttribute("Personal_data");
-            double tw = target_weight;
+           int target_kcal = (int) request.getSession().getAttribute("target_kcal");
 
-            double bmr_difference = todays_w - tw;
+            int bmr_difference = kcal - target_kcal;
 
-            d.setTodays_weight(bmr_difference);
+            d.setBmr_difference(bmr_difference);
 
             em.getTransaction().begin();
             em.persist(d);
