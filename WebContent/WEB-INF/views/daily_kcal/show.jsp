@@ -29,9 +29,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <p>
-                    <a href="<c:url value="/daily/edit?id=${report.id}" />">編集する</a>
-                </p>
+                 <c:if test="${sessionScope.login_personal_data.id == daily_kcal.personal_data.id}">
+                    <p><a href="<c:url value="/reports/edit?id=${report.id}" />">編集する</a></p>
+                </c:if>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

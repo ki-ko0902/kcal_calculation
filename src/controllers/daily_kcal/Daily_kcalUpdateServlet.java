@@ -19,16 +19,16 @@ import models.validators.Daily_kcalValidator;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class Daily_kcalCreateServlet
+ * Servlet implementation class Daily_kcalUpdateServlet
  */
-@WebServlet("/daily/create")
-public class Daily_kcalCreateServlet extends HttpServlet {
+@WebServlet("/Daily_kcalUpdateServlet")
+public class Daily_kcalUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Daily_kcalCreateServlet() {
+    public Daily_kcalUpdateServlet() {
         super();
     }
 
@@ -42,7 +42,7 @@ public class Daily_kcalCreateServlet extends HttpServlet {
         if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            Daily_kcal d = new Daily_kcal();
+            Daily_kcal d = em.find(Daily_kcal.class, (Integer) (request.getSession().getAttribute("report_id")));
 
             d.setPersonal_data((Personal_data) request.getSession().getAttribute("login_personal_data"));
 
@@ -71,7 +71,7 @@ public class Daily_kcalCreateServlet extends HttpServlet {
             int bmr_difference = kcal - target_kcal;
             d.setBmr_difference(bmr_difference);
 
-            List<String> errors = Daily_kcalValidator.validate(d,target_kcal);
+            List<String> errors = Daily_kcalValidator.validate(d, target_kcal);
             if (errors.size() > 0) {
                 em.close();
 
@@ -88,7 +88,10 @@ public class Daily_kcalCreateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
 
+                request.getSession().setAttribute("flush", "更新が完了しました。");
+                request.getSession().removeAttribute("daily_kcal_id");
                 request.getSession().removeAttribute("target_kcal");
+
 
                 response.sendRedirect(request.getContextPath() + "/daily/index");
             }
