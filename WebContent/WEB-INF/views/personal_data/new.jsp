@@ -14,6 +14,9 @@
         <p>
             <a href="<c:url value='/daily/index' />">一覧</a>
         </p>
+        <p>
+            <a href="<c:url value='/login' />">ログイン</a>
+        </p>
 
     </c:param>
 </c:import>

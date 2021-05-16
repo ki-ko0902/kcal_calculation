@@ -12,7 +12,7 @@
         <div id="wrapper">
             <div id="header">
                 <div id="header_menu">
-                    <h1><a href="<c:url value='/' />">日報管理システム</a></h1>&nbsp;&nbsp;&nbsp;
+                    <h1><a href="<c:url value='/' />">kcal計算</a></h1>&nbsp;&nbsp;&nbsp;
                     <c:if test="${sessionScope.login_personal_data != null}">
                         <a href="<c:url value='/daily/index' />">一覧</a>&nbsp;
                     </c:if>
