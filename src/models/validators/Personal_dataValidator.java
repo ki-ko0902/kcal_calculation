@@ -26,8 +26,6 @@ public class Personal_dataValidator {
         }
 
 
-
-
         String gender_error = validateGender(p.getGender());
         if (!gender_error.equals("")) {
             errors.add(gender_error);
@@ -56,8 +54,12 @@ public class Personal_dataValidator {
             errors.add(target_weight_error);
         }
 
+        String for_month_error = validateFor_month(p.getFor_month());
+        if (!for_month_error.equals("")) {
+            errors.add(for_month_error);
+        }
 
-        String target_kcal_error = validateTarget_kcal(p.getTarget_kcal(),bmr );
+        String target_kcal_error = validateTarget_kcal(p.getTarget_kcal(),bmr, p.getTarget_weight());
         if (!target_kcal_error.equals("")) {
             errors.add(target_kcal_error);
         }
@@ -67,15 +69,15 @@ public class Personal_dataValidator {
 
     private static String validateName(String name, Boolean nameDuplicateCheckFlag) {
         if(name == null || name.equals("")) {
-            return "名前を入力してください。";
+            return "ニックネームを入力してください。";
         }
 
         if(nameDuplicateCheckFlag) {
             EntityManager em = DBUtil.createEntityManager();
-            long personal_date_count = (long)em.createNamedQuery("checkRegisteredCode", Long.class).setParameter("name", name).getSingleResult();
+            long personal_data_count = (long)em.createNamedQuery("checkRegisteredName", Long.class).setParameter("name", name).getSingleResult();
             em.close();
-            if(personal_date_count > 0) {
-                return "入力された名前はすでに存在しています。";
+            if(personal_data_count > 0) {
+                return "入力されたニックネームはすでに使用されています。";
             }
         }
 
@@ -99,16 +101,16 @@ public class Personal_dataValidator {
             return "";
         }
 
-     private static String validateHeight(Double height) {
-         if(height == null || height.equals("")) {
+     private static String validateHeight(double height) {
+         if(height == 0) {
              return "身長を入力してください";
          }
 
          return "";
      }
 
-          private static String validateWeight(Double weight) {
-         if(weight == null || weight.equals("")) {
+          private static String validateWeight(double weight) {
+         if(weight == 0) {
              return "体重を入力してください";
          }
 
@@ -116,23 +118,32 @@ public class Personal_dataValidator {
      }
 
           private static String validateAge(Integer age) {
-              if(age == null || age.equals("")) {
-                  return "体重を入力してください";
+              if(age < 0 ) {
+                  return "年齢を入力してください";
               }
 
               return "";
           }
 
 
-          private static String validateTarget_weight(Double target_weight) {
-              if(target_weight == null || target_weight.equals("")) {
+          private static String validateTarget_weight(double target_weight) {
+              if(target_weight == 0) {
                   return "目標体重を入力してください";
               }
 
               return "";
           }
-     private static String validateTarget_kcal(Integer target_kcal, Double bmr) {
-        if (target_kcal < bmr) {
+
+          private static String validateFor_month(Integer for_month) {
+              if(for_month < 0) {
+                  return "目標期間を入力してください";
+              }
+
+              return "";
+          }
+
+     private static String validateTarget_kcal(Integer target_kcal, double bmr, double target_weight) {
+        if (target_kcal < bmr  && target_weight > 0) {
             return "日々の目標摂取kcalが基礎代謝を下回り危険です。" + "目標期間を長くするか、目標体重を増やしてください。";
         }
 

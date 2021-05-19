@@ -47,17 +47,49 @@ public class Personal_dataCreateServlet extends HttpServlet {
                     (String) this.getServletContext().getAttribute("pepper")));
 
             p.setGender(request.getParameter("gender"));
-            p.setHeight(Double.parseDouble(request.getParameter("height")));
-            p.setWeight(Double.parseDouble(request.getParameter("weight")));
-            p.setAge(Integer.parseInt(request.getParameter("age")));
-            p.setTarget_weight(Double.parseDouble(request.getParameter("target_weight")));
 
-            double h = Double.parseDouble(request.getParameter("height"));
-            double w = Double.parseDouble(request.getParameter("weight"));
-            int a = Integer.parseInt(request.getParameter("age"));
-            double tw = Double.parseDouble(request.getParameter("target_weight"));
+
+            if(request.getParameter("height") == null || request.getParameter("height").equals("")) {
+                p.setHeight(0.0);
+            } else {
+                p.setHeight(Double.parseDouble(request.getParameter("height")));
+            }
+
+
+            if(request.getParameter("weight") == null || request.getParameter("weight").equals("")) {
+                p.setWeight(0.0);
+            } else {
+                p.setWeight(Double.parseDouble(request.getParameter("weight")));
+            }
+
+
+            if(request.getParameter("age") == null || request.getParameter("age").equals("")) {
+                p.setAge(-1);
+            } else {
+                p.setAge(Integer.parseInt(request.getParameter("age")));
+            }
+
+
+            if(request.getParameter("target_weight") == null || request.getParameter("target_weight").equals("")) {
+                p.setTarget_weight(0.0);
+            } else {
+                p.setTarget_weight(Double.parseDouble(request.getParameter("target_weight")));
+            }
+
+
+            if(request.getParameter("for_month") == null || request.getParameter("for_month").equals("")) {
+                p.setFor_month(-1);
+            } else {
+                p.setFor_month(Integer.parseInt(request.getParameter("for_month")));
+            }
+
+
+            double h = p.getHeight();
+            double w = p.getWeight();
+            int a = p.getAge();
+            double tw = p.getTarget_weight();
             double m = Double.parseDouble(request.getParameter("momentum"));
-            int month = Integer.parseInt(request.getParameter("month"));
+            int month = p.getFor_month();
 
             double bmr = getBmr(request.getParameter("gender"), w, h, a);
 
@@ -80,8 +112,9 @@ public class Personal_dataCreateServlet extends HttpServlet {
 
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("personal_data", p);
+                request.setAttribute("errors", errors);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/personal/new.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/personal_data/new.jsp");
                 rd.forward(request, response);
 
             } else {
@@ -91,9 +124,10 @@ public class Personal_dataCreateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
 
-                request.getSession().setAttribute("target_kcal", target_kcal);
+                request.getSession().setAttribute("flush", "登録が完了しました。");
+                request.getSession().setAttribute("login_personal_data", p);
 
-                response.sendRedirect(request.getContextPath() + "/daily/index");
+                response.sendRedirect(request.getContextPath() + "/personal/index");
 
             }
 

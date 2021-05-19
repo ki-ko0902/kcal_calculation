@@ -38,16 +38,29 @@ public class Daily_kcalIndexServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        List<Personal_data> personal_data = em.createNamedQuery("getAllPersonal_data", Personal_data.class).getResultList();
-        response.getWriter().append(Integer.valueOf( personal_data.size()).toString());
+        Personal_data p = (Personal_data)request.getSession().getAttribute("login_personal_data");
+        int id = p.getId();
 
-       List<Daily_kcal> daily_kcal = em.createNamedQuery("getAllDaily_kcal", Daily_kcal.class).getResultList();
-        response.getWriter().append(Integer.valueOf(daily_kcal.size()).toString());
+        List<Personal_data> personal_data = em.createNamedQuery("getAllPersonal_data", Personal_data.class)
+                .setParameter("id",id) .getResultList();
+
+
+
+       List<Daily_kcal> daily_kcal = em.createNamedQuery("getAllDaily_kcal", Daily_kcal.class)
+                .setParameter("personal_data",p).getResultList();
+
+
 
         em.close();
 
+
         request.setAttribute("personal_data", personal_data);
         request.setAttribute("daily_kcal", daily_kcal);
+
+        if(request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/index.jsp");
         rd.forward(request, response);

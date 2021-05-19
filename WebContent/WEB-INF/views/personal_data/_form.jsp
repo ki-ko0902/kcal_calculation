@@ -13,7 +13,7 @@
 </c:if>
 
 <br />
-<label for="name">名前</label>
+<label for="name">ニックネーム</label>
 <br />
 <input type="text" name="name" value="${personal_data.name}" />
 <br />
@@ -52,8 +52,8 @@
 </label>
 <br />
 <br />
-<label><strong>目標</strong> <br /> <input type="number"
-    name="month" step="1" min="1">ヶ月で </label>
+<label><strong>目標期間</strong> <br /> <input type="number"
+    name="for_month" step="1" min="1">ヶ月で </label>
 <br />
 <label>目標体重 <input type="number" name="target_weight" step="0.1"
     min="30" max="200"> kg

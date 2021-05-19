@@ -29,7 +29,7 @@
 
 <label for="title">今日の体重</label>
 <br />
-<input type="number" name="todays_weight" />
+<input type="number" name="todays_weight" step="0.1" min="0"/>
 <br />
 <br />
 <br />

@@ -18,7 +18,7 @@ import models.Personal_data;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter("/*")
+@WebFilter(urlPatterns={"/index.html","/daily/*", "/personal/update", "/personal/edit","/personal/show","/personal/destroy","/personal/edit"})
 public class LoginFilter implements Filter {
 
     /**
@@ -39,23 +39,14 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         String context_path = ((HttpServletRequest) request).getContextPath();
-        String servlet_path = ((HttpServletRequest) request).getServletPath();
 
-        if (!servlet_path.matches("/css.*" )) {
-            HttpSession session = ((HttpServletRequest) request).getSession();
+        HttpSession session = ((HttpServletRequest) request).getSession();
 
-            Personal_data p = (Personal_data) session.getAttribute("login_personal_data");
+        Personal_data p = (Personal_data) session.getAttribute("login_personal_data");
 
-            if (!servlet_path.equals("/login")) {
-                if (p == null ) {
-                    ((HttpServletResponse) response).sendRedirect(context_path + "/login");
-                    return;
-                }
-                if (p != null) {
-                    ((HttpServletResponse) response).sendRedirect(context_path + "/");
-                    return;
-                }
-            }
+        if (p == null) {
+            ((HttpServletResponse) response).sendRedirect(context_path + "/login");
+            return;
         }
 
         chain.doFilter(request, response);

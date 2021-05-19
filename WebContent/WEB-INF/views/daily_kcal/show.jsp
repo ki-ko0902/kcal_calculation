@@ -20,7 +20,7 @@
                             <td><c:out value="${daily_kcal.kcal}" /></td>
                         </tr>
                         <tr>
-                            <th>目標摂取kcalとの差</th>
+                            <th>1日の理想摂取kcalとの差</th>
                             <td><c:out value="${daily_kcal.bmr_difference}" /></td>
                         </tr>
                         <tr>

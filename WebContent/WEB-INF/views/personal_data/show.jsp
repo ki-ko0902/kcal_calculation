@@ -12,7 +12,7 @@
                 <table>
                     <tbody>
                         <tr>
-                            <th>名前</th>
+                            <th>ニックネーム</th>
                             <td><c:out value="${personal_data.name}" /></td>
                         </tr>
                         <tr>
@@ -21,23 +21,27 @@
                         </tr>
                         <tr>
                             <th>年齢</th>
-                            <td><c:out value="${personal_data.age}" /></td>
+                            <td><c:out value="${personal_data.age}" />歳</td>
                         </tr>
                         <tr>
                             <th>身長(cm)</th>
-                            <td><c:out value="${personal_data.height}" /></td>
+                            <td><c:out value="${personal_data.height}" />cm</td>
                         </tr>
                         <tr>
                             <th>体重(kg)</th>
-                            <td><c:out value="${personal_data.weight}" /></td>
+                            <td><c:out value="${personal_data.weight}" />kg</td>
                         </tr>
                         <tr>
-                            <th>目標摂取kcal</th>
-                            <td><c:out value="${personal_data.target_kcal}" /></td>
+                            <th>1日の理想摂取kcal</th>
+                            <td><c:out value="${personal_data.target_kcal}" />kcal</td>
                         </tr>
                         <tr>
                             <th>目標体重</th>
-                            <td><c:out value="${personal_data.target_weight}" /></td>
+                            <td><c:out value="${personal_data.target_weight}" />kg</td>
+                        </tr>
+                        <tr>
+                            <th>目標期間</th>
+                            <td><c:out value="${personal_data.for_month}" />ヶ月</td>
                         </tr>
                     </tbody>
                 </table>

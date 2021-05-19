@@ -44,7 +44,6 @@ public class Daily_kcalCreateServlet extends HttpServlet {
 
             Daily_kcal d = new Daily_kcal();
 
-            d.setPersonal_data((Personal_data) request.getSession().getAttribute("login_personal_data"));
 
             Date date = new Date(System.currentTimeMillis());
             String d_str = request.getParameter("date");
@@ -63,10 +62,13 @@ public class Daily_kcalCreateServlet extends HttpServlet {
 
             d.setKcal(Integer.parseInt(request.getParameter("kcal")));
             int kcal = Integer.parseInt(request.getParameter("kcal"));
-            ;
+
             d.setTodays_weight(Double.parseDouble(request.getParameter("todays_weight")));
 
-            int target_kcal = (int) request.getSession().getAttribute("target_kcal");
+
+            // Personal_dataのtarget_kcalを取得
+            Personal_data p = (Personal_data) request.getSession().getAttribute("login_personal_data");
+             int target_kcal = p.getTarget_kcal();
 
             int bmr_difference = kcal - target_kcal;
             d.setBmr_difference(bmr_difference);

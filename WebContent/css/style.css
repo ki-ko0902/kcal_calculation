@@ -1,21 +1,23 @@
 @CHARSET "UTF-8";
 
-body {
-    color: #333333;
-    font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
-        Arial, sans-serif;
+#header_menu {
+    width: 57%;
+    padding-top: 17px;
+    padding-left: 3%;
+    font-size: 28px;
+    display: inline-block;
 }
 
-#header {
-    width: 100%;
-    height: 70px;
-    background-color: #333333;
+#personal_data_name {
+    color: #0080ff;
+    width: 36%;
+    padding-right: 3%;
+    text-align: right;
+    display: inline-block;
 }
 
-#content {
-    width: 80%;
-    margin-top: 20px;
-    padding-left: 7%;
+#header a {
+    color: #000040;
 }
 
 h1 {
@@ -24,7 +26,30 @@ h1 {
     padding-left: 3%;
     font-size: 36px;
     color: #eeeeee;
+    display: inline;
 }
+
+
+body {
+    color: #333333;
+    font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
+        Arial, sans-serif;
+}
+
+#header {
+    width: 100%;
+    height: 75px;
+    background-color: #ff8040;
+    margin-bottom: 60px
+}
+
+#content {
+    width: 80%;
+    margin-top: 20px;
+    padding-left: 7%;
+}
+
+
 h2 {
     font-size: 24px;
     margin-bottom: 15px;
@@ -105,25 +130,6 @@ tr.row0 {
 }
 
 
-#header_menu {
-    width: 57%;
-    padding-top: 17px;
-    padding-left: 3%;
-    display: inline-block;
-}
-
-#personal_data_name {
-    color: #cccccc;
-    width: 36%;
-    padding-right: 3%;
-    text-align: right;
-    display: inline-block;
-}
-
-#header a {
-    color: #eeeeee;
-}
-
 h1 a {
     color: #eeeeee;
 }
@@ -138,32 +144,37 @@ table#personal_data .personal_gender {
    }
 
 table#personal_data .personal_age {
-    width: 10%;
+    width: 15%;
     text-align: center;
 }
 
 table#personal_data .personal_height {
-    width: 20%;
+    width: 15%;
     text-align: center;
 }
 
 table#personal_data .personal_weight {
-    width: 20%;
+    width: 15%;
     text-align: center;
 }
 
 table#personal_data .personal_target_kcal {
-    width: 30%;
+    width: 25%;
     text-align: center;
 }
 
 table#personal_data .personal_target_weight {
-    width: 20%;
+    width: 15%;
+    text-align: center;
+}
+
+table#personal_data .personal_for_month {
+    width: 15%;
     text-align: center;
 }
 
 table#personal_data .personal_edit {
-    width: 10%;
+    width: 15%;
     text-align: center;
 }
 

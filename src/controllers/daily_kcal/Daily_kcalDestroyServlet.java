@@ -44,7 +44,7 @@ public class Daily_kcalDestroyServlet extends HttpServlet {
 
                 request.getSession().removeAttribute("daily_kcal_id");
 
-                response.sendRedirect(request.getContextPath() + "/employees/index");
+                response.sendRedirect(request.getContextPath() + "/daily/index");
             }
         }
 

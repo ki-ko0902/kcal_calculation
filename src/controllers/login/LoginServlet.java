@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
                     );
 
             try {
-                p = em.createNamedQuery("checkLoginCodeAndPassword", Personal_data.class)
+                p = em.createNamedQuery("checkLoginNameAndPassword", Personal_data.class)
                       .setParameter("name", name)
                       .setParameter("pass", password)
                       .getSingleResult();
@@ -82,7 +82,7 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("login_personal_data", p);
 
             request.getSession().setAttribute("flush", "ログインしました。");
-            response.sendRedirect(request.getContextPath() + "/");
+            response.sendRedirect(request.getContextPath() + "/index.html");
         }
     }
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Daily_kcal;
 import models.Personal_data;
 import utils.DBUtil;
 
@@ -35,15 +36,24 @@ public class Personal_dataIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        long personal_data_count = (long)em.createNamedQuery("getPersonal_dataCount", Long.class)
-                .getSingleResult();
+        Personal_data p = (Personal_data)request.getSession().getAttribute("login_personal_data");
+        int id = p.getId();
 
-        List<Personal_data> personal_data = em.createNamedQuery("getAllPersonal_data", Personal_data.class).getResultList();
+
+       List<Personal_data> personal_data = em.createNamedQuery("getAllPersonal_data", Personal_data.class)
+               .setParameter("id",id) .getResultList();
+
+
+
+      List<Daily_kcal> daily_kcal = em.createNamedQuery("getAllDaily_kcal", Daily_kcal.class)
+               .setParameter("personal_data",p).getResultList();
+
+
 
         em.close();
 
         request.setAttribute("personal_data", personal_data);
-        request.setAttribute("personal_data_count", personal_data_count);
+        request.setAttribute("daily_kcal", daily_kcal);
 
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));

@@ -21,7 +21,7 @@ import utils.DBUtil;
 /**
  * Servlet implementation class Daily_kcalUpdateServlet
  */
-@WebServlet("/Daily_kcalUpdateServlet")
+@WebServlet("/daily/update")
 public class Daily_kcalUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -79,7 +79,7 @@ public class Daily_kcalUpdateServlet extends HttpServlet {
                 request.setAttribute("daily_kcal", d);
                 request.setAttribute("errors", errors);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily/new.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/edit.jsp");
                 rd.forward(request, response);
             } else {
 
@@ -90,7 +90,6 @@ public class Daily_kcalUpdateServlet extends HttpServlet {
 
                 request.getSession().setAttribute("flush", "更新が完了しました。");
                 request.getSession().removeAttribute("daily_kcal_id");
-                request.getSession().removeAttribute("target_kcal");
 
 
                 response.sendRedirect(request.getContextPath() + "/daily/index");

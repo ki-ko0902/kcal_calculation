@@ -13,20 +13,20 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name = "getAllPersonal_data",
-        query = "SELECT p FROM Personal_data AS p ORDER BY p.id DESC"
+        query = "SELECT p FROM Personal_data AS p WHERE p.id= :id ORDER BY p.id DESC"
     ),
     @NamedQuery(
         name = "getPersonal_dataCount",
-        query = "SELECT COUNT(p) FROM Personal_data AS p"
+        query = "SELECT COUNT(p) FROM Personal_data AS p WHERE p.id = :id"
     ),
     @NamedQuery(
         name = "checkRegisteredName",
         query = "SELECT COUNT(p) FROM Personal_data AS p WHERE p.name = :name"
     ),
     @NamedQuery(
-        name = "checkLoginNameAndPassword",
-        query = "SELECT p FROM Personal_data AS p WHERE p.delete_flag = 0 AND p.name = :code AND p.password = :pass"
-    )
+            name = "checkLoginNameAndPassword",
+            query = "SELECT p FROM Personal_data AS p WHERE p.name = :name AND p.password = :pass"
+        )
 })
 @Entity
 public class Personal_data {
@@ -35,7 +35,7 @@ public class Personal_data {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name",  unique = true, nullable = false )
+    @Column(name = "name",  nullable = false,  unique = true)
     private String name;
 
     @Column(name = "password", length = 64, nullable = false)
@@ -45,10 +45,10 @@ public class Personal_data {
     private String gender;
 
     @Column(name = "height", nullable = false)
-    private Double height;
+    private double height;
 
     @Column(name = "weight", nullable = false)
-    private Double weight;
+    private double weight;
 
     @Column(name = "age", nullable = false)
     private Integer age;
@@ -57,10 +57,11 @@ public class Personal_data {
     private Integer target_kcal;
 
     @Column(name = "target_weight", nullable = false)
-    private Double target_weight;
+    private double target_weight;
 
-    @Column(name = "delete_flag", nullable = false)
-    private Integer delete_flag;
+    @Column(name = "for_month", nullable = false)
+    private Integer for_month;
+
 
 
     public String getName() {
@@ -95,19 +96,19 @@ public class Personal_data {
         this.gender = gender;
     }
 
-    public Double getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(Double height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public Double getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
@@ -127,19 +128,20 @@ public class Personal_data {
         this.target_kcal = target_kcal;
     }
 
-    public Double getTarget_weight() {
+    public double getTarget_weight() {
         return target_weight;
     }
 
-    public void setTarget_weight(Double target_weight) {
+    public void setTarget_weight(double target_weight) {
         this.target_weight = target_weight;
     }
 
-    public Integer getDelete_flag() {
-        return delete_flag;
+    public Integer getFor_month() {
+        return for_month;
     }
 
-    public void setDelete_flag(Integer delete_flag) {
-        this.delete_flag = delete_flag;
+    public void setFor_month(Integer for_month) {
+        this.for_month = for_month;
     }
+
 }

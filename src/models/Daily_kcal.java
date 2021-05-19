@@ -18,15 +18,13 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getAllDaily_kcal",
-            query = "SELECT d FROM Daily_kcal AS d ORDER BY d.id DESC"
+            query = "SELECT d FROM Daily_kcal AS d WHERE d.personal_data = :personal_data ORDER BY d.id DESC"
             ),
     @NamedQuery(
             name = "getDaily_kcalCount",
-            query = "SELECT COUNT(d) FROM Daily_kcal AS d"
+            query = "SELECT COUNT(d) FROM Daily_kcal AS d WHERE d.personal_data = :personal_data"
             )
 })
-
-
 
 @Entity
 
