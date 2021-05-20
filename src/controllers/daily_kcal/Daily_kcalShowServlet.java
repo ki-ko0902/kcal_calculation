@@ -41,6 +41,7 @@ public class Daily_kcalShowServlet extends HttpServlet {
             request.setAttribute("daily_kcal", d);
             request.setAttribute("_token", request.getSession().getId());
 
+
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/show.jsp");
             rd.forward(request, response);
         }

@@ -43,7 +43,7 @@ public class Daily_kcal {
     private Integer kcal;
 
     @Column(name = "todays_weight", nullable = false)
-    private Double todays_weight;
+    private double todays_weight;
 
     @Column(name = "bmr_difference", nullable = false)
     private Integer bmr_difference;
@@ -81,11 +81,11 @@ public class Daily_kcal {
         this.kcal = kcal;
     }
 
-    public Double getTodays_weight() {
+    public double getTodays_weight() {
         return todays_weight;
     }
 
-    public void setTodays_weight(Double todays_weight) {
+    public void setTodays_weight(double todays_weight) {
         this.todays_weight = todays_weight;
     }
 

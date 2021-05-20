@@ -14,7 +14,7 @@
         </c:if>
         <h2>ログイン</h2>
         <form method="POST" action="<c:url value='/login' />">
-            <label for="name">名前</label><br />
+            <label for="name">ニックネーム</label><br />
             <input type="text" name="name" value="${name}" />
             <br /><br />
 

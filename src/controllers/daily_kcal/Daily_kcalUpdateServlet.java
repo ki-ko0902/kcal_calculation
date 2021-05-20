@@ -42,7 +42,7 @@ public class Daily_kcalUpdateServlet extends HttpServlet {
         if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            Daily_kcal d = em.find(Daily_kcal.class, (Integer) (request.getSession().getAttribute("report_id")));
+            Daily_kcal d = em.find(Daily_kcal.class, (Integer) (request.getSession().getAttribute("daily_kcal_id")));
 
             d.setPersonal_data((Personal_data) request.getSession().getAttribute("login_personal_data"));
 
@@ -61,12 +61,23 @@ public class Daily_kcalUpdateServlet extends HttpServlet {
             Integer mm = Integer.parseInt(sdf2.format(d.getDate()));
             d.setMonth(mm);
 
-            d.setKcal(Integer.parseInt(request.getParameter("kcal")));
-            int kcal = Integer.parseInt(request.getParameter("kcal"));
-            ;
-            d.setTodays_weight(Double.parseDouble(request.getParameter("todays_weight")));
+            if (request.getParameter("kcal") == null || request.getParameter("kcal").equals("")) {
+                d.setKcal(-1);
+            } else {
+                d.setKcal(Integer.parseInt(request.getParameter("kcal")));
+            }
 
-            int target_kcal = (int) request.getSession().getAttribute("target_kcal");
+            int kcal = d.getKcal();
+
+            if (request.getParameter("todays_weight") == null || request.getParameter("todays_weight").equals("")) {
+                d.setTodays_weight(0.0);
+            } else {
+                d.setTodays_weight(Double.parseDouble(request.getParameter("todays_weight")));
+            }
+
+            // Personal_dataのtarget_kcalを取得
+            Personal_data p = (Personal_data) request.getSession().getAttribute("login_personal_data");
+            int target_kcal = p.getTarget_kcal();
 
             int bmr_difference = kcal - target_kcal;
             d.setBmr_difference(bmr_difference);

@@ -47,7 +47,7 @@ public class Daily_kcalEditServlet extends HttpServlet {
             request.getSession().setAttribute("daily_kcal_id", d.getId());
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily/edit.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/edit.jsp");
         rd.forward(request, response);
     }
 

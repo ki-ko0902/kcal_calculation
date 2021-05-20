@@ -40,10 +40,10 @@ public class Daily_kcalDestroyServlet extends HttpServlet {
                 em.remove(d);
                 em.getTransaction().commit();
                 em.close();
+
+
                 request.getSession().setAttribute("flush", "削除が完了しました。");
-
                 request.getSession().removeAttribute("daily_kcal_id");
-
                 response.sendRedirect(request.getContextPath() + "/daily/index");
             }
         }

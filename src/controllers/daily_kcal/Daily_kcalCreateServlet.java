@@ -43,7 +43,7 @@ public class Daily_kcalCreateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
 
             Daily_kcal d = new Daily_kcal();
-
+            d.setPersonal_data((Personal_data) request.getSession().getAttribute("login_personal_data"));
 
             Date date = new Date(System.currentTimeMillis());
             String d_str = request.getParameter("date");
@@ -56,24 +56,32 @@ public class Daily_kcalCreateServlet extends HttpServlet {
             Integer yyyy = Integer.parseInt(sdf.format(d.getDate()));
             d.setYear(yyyy);
 
-            SimpleDateFormat sdf2 = new SimpleDateFormat("mm");
+            SimpleDateFormat sdf2 = new SimpleDateFormat("MM");
             Integer mm = Integer.parseInt(sdf2.format(d.getDate()));
             d.setMonth(mm);
 
-            d.setKcal(Integer.parseInt(request.getParameter("kcal")));
-            int kcal = Integer.parseInt(request.getParameter("kcal"));
+            if (request.getParameter("kcal") == null || request.getParameter("kcal").equals("")) {
+                d.setKcal(-1);
+            } else {
+                d.setKcal(Integer.parseInt(request.getParameter("kcal")));
+            }
 
-            d.setTodays_weight(Double.parseDouble(request.getParameter("todays_weight")));
+            int kcal = d.getKcal();
 
+            if (request.getParameter("todays_weight") == null || request.getParameter("todays_weight").equals("")) {
+                d.setTodays_weight(0.0);
+            } else {
+                d.setTodays_weight(Double.parseDouble(request.getParameter("todays_weight")));
+            }
 
             // Personal_dataのtarget_kcalを取得
             Personal_data p = (Personal_data) request.getSession().getAttribute("login_personal_data");
-             int target_kcal = p.getTarget_kcal();
+            int target_kcal = p.getTarget_kcal();
 
             int bmr_difference = kcal - target_kcal;
             d.setBmr_difference(bmr_difference);
 
-            List<String> errors = Daily_kcalValidator.validate(d,target_kcal);
+            List<String> errors = Daily_kcalValidator.validate(d, target_kcal);
             if (errors.size() > 0) {
                 em.close();
 
@@ -81,7 +89,7 @@ public class Daily_kcalCreateServlet extends HttpServlet {
                 request.setAttribute("daily_kcal", d);
                 request.setAttribute("errors", errors);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily/new.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/daily_kcal/new.jsp");
                 rd.forward(request, response);
             } else {
 
@@ -91,6 +99,7 @@ public class Daily_kcalCreateServlet extends HttpServlet {
                 em.close();
 
                 request.getSession().removeAttribute("target_kcal");
+                request.getSession().setAttribute("flush", "登録が完了しました。");
 
                 response.sendRedirect(request.getContextPath() + "/daily/index");
             }

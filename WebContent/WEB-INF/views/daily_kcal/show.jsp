@@ -16,21 +16,21 @@
                                     pattern="yyyy-MM-dd" /></td>
                         </tr>
                         <tr>
-                            <th>今日の摂取kcal</th>
-                            <td><c:out value="${daily_kcal.kcal}" /></td>
+                            <th>摂取kcal</th>
+                            <td><c:out value="${daily_kcal.kcal}" />kcal</td>
                         </tr>
                         <tr>
-                            <th>1日の理想摂取kcalとの差</th>
-                            <td><c:out value="${daily_kcal.bmr_difference}" /></td>
+                            <th>目標摂取kcalとの差</th>
+                            <td><c:out value="${daily_kcal.bmr_difference}" />kcal</td>
                         </tr>
                         <tr>
-                            <th>今日の体重</th>
-                            <td><c:out value="${daily_kcal.todays_weight}" /></td>
+                            <th>体重</th>
+                            <td><c:out value="${daily_kcal.todays_weight}" />kg</td>
                         </tr>
                     </tbody>
                 </table>
                  <c:if test="${sessionScope.login_personal_data.id == daily_kcal.personal_data.id}">
-                    <p><a href="<c:url value="/reports/edit?id=${report.id}" />">編集する</a></p>
+                    <p><a href="<c:url value="/daily/edit?id=${daily_kcal.id}" />">編集する</a></p>
                 </c:if>
             </c:when>
             <c:otherwise>
