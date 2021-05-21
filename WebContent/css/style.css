@@ -4,12 +4,12 @@
     width: 57%;
     padding-top: 17px;
     padding-left: 3%;
-    font-size: 28px;
+    font-size:24px;
     display: inline-block;
 }
 
 #personal_data_name {
-    color: #0080ff;
+    color: #0000ff;
     width: 36%;
     padding-right: 3%;
     text-align: right;
@@ -29,6 +29,9 @@ h1 {
     display: inline;
 }
 
+h1 a {
+    color: #eeeeee;
+}
 
 body {
     color: #333333;
@@ -39,7 +42,7 @@ body {
 #header {
     width: 100%;
     height: 75px;
-    background-color: #ff8040;
+    background-color: #ffff80;
     margin-bottom: 60px
 }
 
@@ -69,7 +72,7 @@ p {
 
 a {
     text-decoration: none;
-    color: #24738e;
+    color: #0080ff;
 }
 
 table, tr, th, td {
@@ -130,9 +133,9 @@ tr.row0 {
 }
 
 
-h1 a {
-    color: #eeeeee;
-}
+
+
+
 table#personal_data th {
     font-weight: bold;
     padding: 10px 2%;
