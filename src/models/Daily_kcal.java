@@ -16,14 +16,15 @@ import javax.persistence.Table;
 @Table(name = "daily_kcal")
 
 @NamedQueries({
-    @NamedQuery(
-            name = "getAllDaily_kcal",
-            query = "SELECT d FROM Daily_kcal AS d WHERE d.personal_data = :personal_data ORDER BY d.id DESC"
-            ),
-    @NamedQuery(
-            name = "getDaily_kcalCount",
-            query = "SELECT COUNT(d) FROM Daily_kcal AS d WHERE d.personal_data = :personal_data"
-            )
+        @NamedQuery(name = "getAllDaily_kcal",
+                    query = "SELECT d FROM Daily_kcal AS d WHERE d.personal_data = :personal_data AND d.year = :year AND d.month = :month ORDER BY d.date DESC"),
+
+        @NamedQuery(name = "getDaily_kcal_y_m",
+                    query = " SELECT d FROM Daily_kcal AS d WHERE d.personal_data  = :personal_data GROUP BY d.year, d.month ORDER BY d.date DESC"),
+
+        @NamedQuery(name = "getDaily_kcalCount",
+                    query = "SELECT COUNT(d) FROM Daily_kcal AS d WHERE d.personal_data = :personal_data")
+
 })
 
 @Entity
@@ -120,7 +121,5 @@ public class Daily_kcal {
     public void setMonth(Integer month) {
         this.month = month;
     }
-
-
 
 }

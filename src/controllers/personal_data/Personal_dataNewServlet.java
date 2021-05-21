@@ -33,6 +33,7 @@ public class Personal_dataNewServlet extends HttpServlet {
         request.setAttribute("_token", request.getSession().getId());
         request.setAttribute("personal_data", new Personal_data());
 
+
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/personal_data/new.jsp");
         rd.forward(request, response);
     }

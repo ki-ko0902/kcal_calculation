@@ -64,7 +64,8 @@
                     <th class="daily_weight">今日の体重</th>
                     <th class="daily_edit">編集</th>
                 </tr>
-                <c:forEach var="daily_kcal" items="${daily_kcal}" varStatus="status">
+                <c:forEach var="daily_kcal" items="${daily_kcalList}"
+                    varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td class="daily_date"><fmt:formatDate
                                 value='${daily_kcal.date}' pattern='yyyy-MM-dd' /></td>
@@ -79,7 +80,20 @@
                 </c:forEach>
             </tbody>
         </table>
-
+        <div id="pagination">
+            （全 ${daily_kcal_count} 件）<br />
+            <c:forEach var="i" begin="1" end="${page_all_count}" step="1">
+                <c:choose>
+                    <c:when test="${i == page}">
+                        <c:out value="${i}" />&nbsp;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value='/daily/index?page=${i}' />"><c:out
+                                value="${i}" /></a>&nbsp;
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
 
 
     </c:param>

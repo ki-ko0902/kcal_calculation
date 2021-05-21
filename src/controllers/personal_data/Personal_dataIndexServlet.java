@@ -45,15 +45,51 @@ public class Personal_dataIndexServlet extends HttpServlet {
 
 
 
-      List<Daily_kcal> daily_kcal = em.createNamedQuery("getAllDaily_kcal", Daily_kcal.class)
-               .setParameter("personal_data",p).getResultList();
+       int page;
 
+       try {
+           page = Integer.parseInt(request.getParameter("page"));
+       } catch (Exception e) {
+           page = 1;
+       }
+
+       long daily_kcal_count = (long) em.createNamedQuery("getDaily_kcalCount", Long.class)
+                                  .setParameter("personal_data", p)
+                                  .getSingleResult();
+
+       int pageAllCount = 0;
+       List<Daily_kcal> pageInfoList = null;
+       List<Daily_kcal> daily_kcalList = null;
+
+       if (daily_kcal_count > 0) {
+
+           pageInfoList = em.createNamedQuery("getDaily_kcal_y_m", Daily_kcal.class)
+                        .setParameter("personal_data", p)
+                        .getResultList();
+
+           pageAllCount = pageInfoList.size();
+
+           request.getSession().setAttribute("page_info", pageInfoList);
+
+           // pageに該当する情報を取得 ※ (page - 1)しているのは、リストや配列が0から始まるため。
+           Integer year = pageInfoList.get(page - 1).getYear();
+           Integer month = pageInfoList.get(page - 1).getMonth();
+           daily_kcalList = em.createNamedQuery("getAllDaily_kcal", Daily_kcal.class)
+                   .setParameter("personal_data", p)
+                   .setParameter("year", year)
+                   .setParameter("month", month)
+                   .getResultList();
+       }
 
 
         em.close();
 
         request.setAttribute("personal_data", personal_data);
-        request.setAttribute("daily_kcal", daily_kcal);
+        request.setAttribute("daily_kcalList", daily_kcalList);
+        request.setAttribute("daily_kcal_count", daily_kcal_count);
+        request.setAttribute("page_all_count", pageAllCount);
+        request.setAttribute("page", page);
+
 
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));

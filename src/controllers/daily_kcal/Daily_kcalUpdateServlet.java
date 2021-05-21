@@ -53,13 +53,11 @@ public class Daily_kcalUpdateServlet extends HttpServlet {
             }
             d.setDate(date);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-            Integer yyyy = Integer.parseInt(sdf.format(d.getDate()));
-            d.setYear(yyyy);
 
-            SimpleDateFormat sdf2 = new SimpleDateFormat("mm");
-            Integer mm = Integer.parseInt(sdf2.format(d.getDate()));
-            d.setMonth(mm);
+            d.setYear(Integer.parseInt(new SimpleDateFormat("yyyy").format(date)));
+
+            d.setMonth(Integer.parseInt(new SimpleDateFormat("MM").format(date)));
+
 
             if (request.getParameter("kcal") == null || request.getParameter("kcal").equals("")) {
                 d.setKcal(-1);
@@ -98,6 +96,7 @@ public class Daily_kcalUpdateServlet extends HttpServlet {
                 em.persist(d);
                 em.getTransaction().commit();
                 em.close();
+
 
                 request.getSession().setAttribute("flush", "更新が完了しました。");
                 request.getSession().removeAttribute("daily_kcal_id");
