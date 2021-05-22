@@ -139,7 +139,7 @@ public class Personal_dataUpdateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
 
-
+                request.setAttribute("personal_data_id", p);
                 request.getSession().setAttribute("flush", "更新が完了しました。");
                 response.sendRedirect(request.getContextPath() + "/daily/index");
             }
