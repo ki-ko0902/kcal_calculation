@@ -11,5 +11,8 @@
 
         <p><a href="<c:url value='/daily/index' />">一覧</a></p>
 
+         <c:import url="../layout/kcal_example.jsp">
+         </c:import>
+
     </c:param>
-</c:import>
+     </c:import>
