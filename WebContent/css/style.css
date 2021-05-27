@@ -1,5 +1,16 @@
 @CHARSET "UTF-8";
 
+#login{
+  display: inline-block;
+}
+
+#Instructions {
+  padding: 10px;
+  display:inline-block;
+ text-align: left;
+   border: 3px solid black;
+   }
+
 #header_menu {
     width: 57%;
     padding-top: 17px;
@@ -215,4 +226,35 @@ pre {
 }
 h3 {
     font-size: larger;
+}
+
+h4 {
+
+  font-size: 32px;
+   display: inline;
+  color: #fffff;
+   background-color: #ffff80;
+}
+table#kcal{
+   width: 800px;
+}
+
+tr.tr1:nth-child(even) td  {
+    background-color: #ffeed4;
+}
+
+tr.tr0 {
+    background-color: #ffd1d4;
+  font-weight: bold;
+}
+
+
+table#kcal .table01 {
+        width: 250px;
+      text-align: left;
+  }
+
+table#kcal .table02 {
+     width: 150px;
+      text-align:right;
 }
